@@ -64,15 +64,15 @@ Each contributor is responsible for specific algorithms. To keep the project org
 - Regularly **pull from `main`** to keep your branch up to date and avoid merge conflicts.
 - To ignore all `.idea/` directories and `.gitignore` files located **anywhere in the project**, including in subdirectories, add the following lines to your root `.gitignore`:
 
-```gitignore
-**/.idea/
-**/.gitignore
-```
+    ```gitignore
+    **/.idea/
+    **/.gitignore
+    ```
 
-You can be a bit more cautious with:
+  You can be a bit more cautious with:  
 
-```gitignore
-**/.idea
-**/.idea/
-**/.gitignore
-```
+  ```gitignore
+  **/.idea
+  **/.idea/
+  **/.gitignore
+  ```
