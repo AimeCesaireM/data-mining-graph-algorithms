@@ -62,3 +62,17 @@ Each contributor is responsible for specific algorithms. To keep the project org
 - **Use `.gitignore`** to avoid committing unnecessary files (e.g., compiled binaries, `.DS_Store`, IDE configs).
 - Keep your code modular and readable—other team members might need to understand or modify it later.
 - Regularly **pull from `main`** to keep your branch up to date and avoid merge conflicts.
+- To ignore all `.idea/` directories and `.gitignore` files located **anywhere in the project**, including in subdirectories, add the following lines to your root `.gitignore`:
+
+```gitignore
+**/.idea/
+**/.gitignore
+```
+
+You can be a bit more cautious with:
+
+```gitignore
+**/.idea
+**/.idea/
+**/.gitignore
+```
