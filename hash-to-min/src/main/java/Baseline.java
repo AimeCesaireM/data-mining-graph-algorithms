@@ -14,7 +14,6 @@ public class Baseline {
         for (String node : graph.keySet()) {
             if (visited.contains(node)) continue;
 
-            // new component via DFS
             Set<String> component = new HashSet<>();
             Deque<String> stack = new ArrayDeque<>();
             stack.push(node);
@@ -62,7 +61,10 @@ public class Baseline {
         }
 
         // 2) Compute connected components
+        double start = System.currentTimeMillis();
         List<Set<String>> comps = findComponents(graph);
+        double end = System.currentTimeMillis();
+        double elapsed = (end - start) / 1000.0;
 
         // 3) Print out each component in sorted order
         int idx = 1;
@@ -71,5 +73,6 @@ public class Baseline {
             Collections.sort(sorted);
             System.out.printf("Component %d: %s%n", idx++, sorted);
         }
+        System.out.printf("Found %d connected components in %f seconds.%n", comps.size(), elapsed);
     }
 }

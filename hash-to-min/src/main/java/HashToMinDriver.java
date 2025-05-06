@@ -36,9 +36,10 @@ public class HashToMinDriver extends Configured implements Tool {
         Path prev = new Path(args[0]);
         Path next = new Path(args[1] + "/iter0");
 
+        boolean converged = false;
         int iter = 0;
 
-        while (iter < MAX_ITERS) {
+        while (!converged && iter < MAX_ITERS) {
             // 1) launch one iteration
             Job job = singleRun.run(prev, next, iter);
 
@@ -50,8 +51,8 @@ public class HashToMinDriver extends Configured implements Tool {
 
             // 3) after the first iteration, check if output == previous
             if (iter > 0) {
-                // check for convergence by comparing the two directories --> the cluster list has not changed
                 if (dirsAreEqual(fs, prev, next)) {
+                    converged = true;
                     // clean up the now-unneeded prev dir
                     fs.delete(prev, true);
                     break;

@@ -36,8 +36,6 @@ public class SingleJobDriver extends Configured {
         FileOutputFormat.setOutputPath(job, outputPath);
 
 
-        // will think about reducers later
-
         job.submit();
         return job;
     }
