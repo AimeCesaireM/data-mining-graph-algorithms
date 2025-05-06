@@ -26,3 +26,5 @@ replay_pid*
 
 **/.idea/
 **/.gitignore
+/hash-to-min/outputBase
+/hash-to-min/input
