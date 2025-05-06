@@ -1,23 +1,20 @@
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
-import org.apache.hadoop.io.IntWritable;
 
 import java.io.IOException;
+import java.util.*;
 
-public class HashToMinReducer
-extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class HashToMinReducer extends Reducer<Text, ClusterWritable, Text, Text> {
+    public void reduce(Text key, Iterable<ClusterWritable> values, Context context) throws IOException, InterruptedException {
+        Set<String> unionCluster = new HashSet<>();
+        for (ClusterWritable cluster : values) {
+            unionCluster.addAll(cluster.getCluster());
+        }
 
-    @Override
-    protected void setup(Reducer<Text, IntWritable, Text, IntWritable>.Context context) throws IOException, InterruptedException {
-        //to be defined
-        super.setup(context);
-    }
-
-    public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
-        //to be defined
-        super.reduce(key, values, context);
+        List<String> sorted = new ArrayList<>(unionCluster);
+        Collections.sort(sorted);
+        context.write(key, new Text(String.join(",", sorted)));
     }
 }
+
