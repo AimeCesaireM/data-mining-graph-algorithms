@@ -23,3 +23,9 @@
 hs_err_pid*
 replay_pid*
 /.idea
+
+**/.idea/
+**/.gitignore
+/hash-to-min/outputBase
+/hash-to-min/input
+hash-to-min/CA-HepPh.txt
