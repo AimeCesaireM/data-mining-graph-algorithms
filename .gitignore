@@ -28,3 +28,4 @@ replay_pid*
 **/.gitignore
 /hash-to-min/outputBase
 /hash-to-min/input
+hash-to-min/CA-HepPh.txt

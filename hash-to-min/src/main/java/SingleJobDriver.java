@@ -11,6 +11,7 @@ public class SingleJobDriver extends Configured {
 
     public SingleJobDriver(Configuration conf) {
         this.conf = conf;
+        conf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem");
     }
 
     public Job run(Path inputPath, Path outputPath, int iteration) throws Exception {

@@ -30,6 +30,7 @@ public class HashToMinDriver extends Configured implements Tool {
         }
 
         Configuration conf = getConf();
+        conf.set("fs.file.impl", "org.apache.hadoop.fs.LocalFileSystem");
         FileSystem fs = FileSystem.get(conf);
         SingleJobDriver singleRun = new SingleJobDriver(conf);
 
@@ -38,8 +39,10 @@ public class HashToMinDriver extends Configured implements Tool {
 
         boolean converged = false;
         int iter = 0;
+        double time = 0;
 
         while (!converged && iter < MAX_ITERS) {
+            double start = System.currentTimeMillis();
             // 1) launch one iteration
             Job job = singleRun.run(prev, next, iter);
 
@@ -60,14 +63,18 @@ public class HashToMinDriver extends Configured implements Tool {
                     fs.delete(prev, true);
                 }
             }
+            double end = System.currentTimeMillis();
+            double elapsed = (end - start) / 1000.0;
+            time += elapsed;
 
             // 4) prepare for next round
             prev = next;
             iter++;
             next = new Path(args[1] + "/iter" + iter);
         }
-
+        double avgTime = time / iter;
         System.out.println("Converged in " + iter + " iteration(s).");
+        System.out.printf("Average time per iteration: %.2f seconds%n", avgTime);
         return 0;
     }
 
